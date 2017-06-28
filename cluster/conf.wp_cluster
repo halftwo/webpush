@@ -1,0 +1,6 @@
+
+xic.Endpoints = @tcp++11911
+
+xic.user = www
+xic.group = www
+

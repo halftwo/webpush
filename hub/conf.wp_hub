@@ -1,0 +1,7 @@
+
+xic.Endpoints = @tcp+0.0.0.0/0+11001 timeout=10000
+
+cluster.proxy = wp_cluster @tcp++11911
+event.proxy = wp_event @tcp++11066
+
+

@@ -1,0 +1,69 @@
+
+
+wp_web
+============
+
+=> login { uid^%i; }
+<= { web^%s; cookie^%s; seq^%i; }
+
+=> logout { uid^%i; }
+<= {}
+
+=~ kickout { uid^%i; }
+
+
+=> get_hub { uid^%i; }
+<= { hubProxy^%s; }
+
+
+=> appoint_web { uid^%i; }
+<= { webProxy^%s; online^%t; }
+
+
+# c: category
+=> send_to_user { uid^%i; c^%s; o^{...}; }
+<= { ok^%t; }
+
+
+# c: category
+=> send_to_users { uids^[%i]; c^%s; o^{...}; }
+<= {}
+
+
+=> get_user_msgs { uid^%i; seq^%i; c^%s; }
+<= { web^%s; seq^%i; msgs^[%b]; }  msg 为send_to_user 的 body 部分
+
+
+ HTTP
+============
+注意: 以下全大写的字符串表示应该被替换的变量, 小写字符原样照写。
+
+
+-----------------------------------------------------------------------
+请求:	/ifr/js?r=URL1&r=URL2&...&r=URLN
+返回:
+
+<html>
+<head>
+<meta charset="utf-8">
+<script type="text/javascript" src="URL1">
+<script type="text/javascript" src="URL2">
+......
+<script type="text/javascript" src="URLN">
+</head>
+<body></body>
+</html>
+
+
+-----------------------------------------------------------------------
+请求:	/k/RANDOM/USER/SEQ?w=WAITSECONDS&c=CATEGORY
+返回:
+
+正常:	
+	{"t":"refresh", "seq":SEQ }
+或
+	{"t":"inform", "seq":SEQ, "msgs":[ {"t":UNIXTIME, "c":CATEGORY, "o":{...}}, ...] } 
+
+错误:
+	{"t":"error", "detail":"..."}
+

@@ -1,0 +1,20 @@
+
+wp_cluster
+===========
+
+
+=> renew { proxy^%S; }
+<= { revision^%i; }
+
+
+=> revision {}
+<= { revision^%i; }
+
+
+=> getProxies { ?prefix^%s; }
+<= { revision^%i; proxies^[%s]; }
+
+
+=> remove { proxy^%s; }
+<= { ok^%t; }
+

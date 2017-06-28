@@ -1,0 +1,15 @@
+
+wp_event
+=====================
+
+# t, <= 255 bytes, format：abc.x.y.z
+# o, <= 255 bytes
+=> push { type^%s; oid^%s; content^{...}; }
+<= {}
+
+# seq, 消息开始序号
+# maxn, 一次获取消息最大个数
+=> pull { seq^%i; maxn^%i; ?prefix^%s; ?wait^%i; }
+<= { seq^%i; events^[%b]; }	
+
+

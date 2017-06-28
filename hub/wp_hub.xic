@@ -1,0 +1,34 @@
+
+wp_hub
+======================
+
+=> get_web { uid^%i; }
+<= { webProxy^%s; }	# empty string if user offline
+
+
+# transfer to wp_web
+# c: category
+=> send_to_user { uid^%i; c^%s; o^{....} }
+<= { ok^%t; }
+
+# transfer to wp_web
+# c: category
+=> send_to_users { uids^[%i]; c^%s; o^{...} }
+<= {}
+
+
+
+NOTE: Following methods are called by wp_web
+
+=> web_login { uid^%i; webProxy^%s; }
+<= {}
+
+=> web_logout { uid^%i; webProxy^%s; }
+<= {}
+
+=> web_keep_users { uids^[%i]; webProxy^%s; }
+<= {}
+
+=> web_drop_users { uids^[%i]; webProxy^%s; }
+<= {}
+

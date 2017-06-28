@@ -1,0 +1,17 @@
+
+xic.Endpoints = @tcp+0.0.0.0/0+11002 timeout=10000
+
+Web.Port = 8000
+Web.Cookie = wp_permit
+Web.NameFile = http.name
+Web.JavascriptDomains = halftwo.com
+Web.Timeout = 55
+
+event.proxy = wp_event @ tcp++11055
+
+# cluster.proxy may be omitted if there is only one wp_web process
+cluster.proxy = wp_cluster @ tcp++11911
+
+xic.user = www
+xic.group = www
+xlog.level = 3

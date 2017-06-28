@@ -1,0 +1,4 @@
+
+xic.Endpoints = @tcp::11055 timeout=5000
+
+
