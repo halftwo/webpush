@@ -22,7 +22,7 @@ struct vstruct_t
 	unsigned char time[VERIFY_TIME_SIZE];
 };
 
-#define VSTRUCT_B64_SIZE	XBASE64_LEN(sizeof(vstruct_t))
+#define VSTRUCT_B64_SIZE	XBASE64_ENCODED_LEN(sizeof(vstruct_t))
 
 void verify_init()
 {
@@ -72,7 +72,7 @@ int verify_check(const char *verify, size_t size, const char *user, size_t user_
 		return 0;
 
 	s = verify;
-	m = XBASE64_LEN(sizeof(vs));
+	m = XBASE64_ENCODED_LEN(sizeof(vs));
 	if (size <= m || verify[m] != '.')
 		return 0;
 
@@ -83,7 +83,7 @@ int verify_check(const char *verify, size_t size, const char *user, size_t user_
 	++m;
 	s = verify + m;
 	m = size - m ;
-	if (m != XBASE64_LEN(user_len))
+	if (m != XBASE64_ENCODED_LEN(user_len))
 		return 0;
 
 	n = xbase64_decode(&url_xbase64, &vuser, s, m, 0);
